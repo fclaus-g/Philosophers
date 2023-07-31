@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   inicio_proyecto.md                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: usuario42 <usuario42@student.42.fr>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/20 12:17:01 by usuario42         #+#    #+#             */
-/*   Updated: 2023/07/21 17:15:56 by usuario42        ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 # PHILOSOPHERS
 
@@ -59,29 +48,31 @@
 		printf("Seconds since 1970: %lu\n", tv.tv_sec);
 		return (0);
 	}
-	```
-	* **pthread_create** -> crea un hilo. Prototipo:
-		**_int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
-		void *(*start_routine) (void *), void *arg);_**
-		(id del hilo, atributos del hilo, funcion que ejecutara el hilo, argumentos de la funcion) <se explica con mas detalle mas abajo>
+```
+
+* **pthread_create** -> crea un hilo. Prototipo:
+	**_int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
+	void *(*start_routine) (void *), void *arg);_**
+	(id del hilo, atributos del hilo, funcion que ejecutara el hilo, argumentos de la funcion) <se explica con mas detalle mas abajo>
 	
-	* **pthread_detach** -> permite que el hilo se ejecute de manera independiente.   Prototipo:	**_int pthread_detach(pthread_t thread);_**
+* **pthread_detach** -> permite que el hilo se ejecute de manera independiente.   Prototipo:
+	**_int pthread_detach(pthread_t thread);_**
 		
-	* **pthread_join** -> espera a que el hilo termine. Prototipo:
-		**_int pthread_join(pthread_t thread, void **retval);_**
+* **pthread_join** -> espera a que el hilo termine. Prototipo:
+	**_int pthread_join(pthread_t thread, void **retval);_**
 	
-	* **pthread_mutex_init** -> inicializa un mutex. Prototipo:
-		**_int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);_**
-		(mutex, atributos del mutex). Si se pasa NULL como atributos se inicializa con los valores por defecto.
+* **pthread_mutex_init** -> inicializa un mutex. Prototipo:
+	**_int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);_**
+	(mutex, atributos del mutex). Si se pasa NULL como atributos se inicializa con los valores por defecto.
 	
-	* **pthread_mutex_destroy** -> destruye un mutex. Prototipo:
-		**_int pthread_mutex_destroy(pthread_mutex_t *mutex);_**
+* **pthread_mutex_destroy** -> destruye un mutex. Prototipo:
+	**_int pthread_mutex_destroy(pthread_mutex_t *mutex);_**
 	
-	* **pthread_mutex_lock** -> bloquea un mutex. Prototipo:
-		**_int pthread_mutex_lock(pthread_mutex_t *mutex);_**
+* **pthread_mutex_lock** -> bloquea un mutex. Prototipo:
+	**_int pthread_mutex_lock(pthread_mutex_t *mutex);_**
 	
-	* **pthread_mutex_unlock** -> desbloquea un mutex. Prototipo:
-		**_int pthread_mutex_unlock(pthread_mutex_t *mutex);_** 
+* **pthread_mutex_unlock** -> desbloquea un mutex. Prototipo:
+	**_int pthread_mutex_unlock(pthread_mutex_t *mutex);_** 
 		
 ## RESUMEN DEL SUBJECT
 	* N-filosofos estan en una mesa redonda y en el centro hay comida.

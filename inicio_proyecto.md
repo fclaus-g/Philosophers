@@ -73,7 +73,9 @@
 	
 * **pthread_mutex_unlock** -> desbloquea un mutex. Prototipo:
 	**_int pthread_mutex_unlock(pthread_mutex_t *mutex);_** 
-		
+sem_close,
+sem_post, sem_wait, sem_unlink
+
 ## RESUMEN DEL SUBJECT
 	* N-filosofos estan en una mesa redonda y en el centro hay comida.
 	* Los filosofos solo pueden comer, pensar o dormir, nunca dos cosas a la vez.

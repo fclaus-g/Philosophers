@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: usuario42 <usuario42@student.42.fr>        +#+  +:+       +#+        */
+/*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:20:10 by usuario42         #+#    #+#             */
-/*   Updated: 2023/08/10 12:00:52 by usuario42        ###   ########.fr       */
+/*   Updated: 2023/09/13 12:12:16 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_take_forks(t_philo *philo)
 {
-	//pthread_mutex_lock(&philo->mutex_fork_l[philo->left_fork]);
+	pthread_mutex_lock(&philo->fork_l[philo->id]);
 	printf("philo[%d] ha tomado el tenedor izquierdo\n", philo->id);
-	//pthread_mutex_lock(&philo->mutex_fork_r[philo->right_fork]);
+	pthread_mutex_lock(&philo->fork_r[philo->id]);
 	printf("philo[%d] ha tomado el tenedor derecho\n", philo->id);
 }
 void ft_eat(t_philo *philo)

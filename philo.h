@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/18 12:28:00 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:11:03 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_drop_forks(t_philo *philo);
 void	ft_die(t_philo *philo);
 
 int		ft_check_args(int ac, char **av);
-void	*ft_routine(void *philo);
+void	*ft_routine(void *arg);
 void	ft_werror(char *str, int out);
 time_t	ft_get_time(void);
 #endif

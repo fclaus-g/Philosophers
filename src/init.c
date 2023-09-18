@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/18 12:27:36 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:11:14 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_init_philos(t_data *data)
 	{
 		data->philo[i].id = i + 1;
 		data->philo[i].eat_times = 0;
-		data->philo->last_eat = 0;
+		data->philo[i].last_eat = 0;
 		data->philo[i].data = data;
 		printf(GREEN"philo[%d].id: %d creado\n"RESET, i, data->philo[i].id);
 	}
@@ -73,6 +73,7 @@ void	ft_init_mutex(t_data *data)
 	int	i;
 
 	i = -1;
+	data->fork = malloc(sizeof(pthread_mutex_t) * data->philos);
 	while (++i < data->forks)
 	{
 		pthread_mutex_init(&data->fork[i], NULL);
@@ -90,9 +91,11 @@ void	ft_init_threads(t_data *data)
 	int	i;
 
 	i = -1;
-	data->philo->thread = malloc(sizeof(pthread_t) * data->philos + 1);
 	while (++i < data->philos)
 	{
+		data->philo[i].thread = malloc(sizeof(pthread_t));
+		if (!data->philo[i].thread)
+			return ;
 		if(pthread_create(&data->philo[i].thread, NULL, (void*)&ft_routine, &data->philo[i]) != 0)
 			return (ft_werror("Error: pthread_create\n", 2));
 		printf(ORANGE"PHILO Nº%d enviado al hilo %d\n"RESET, i, i);

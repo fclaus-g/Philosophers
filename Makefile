@@ -6,13 +6,13 @@
 #    By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 11:01:55 by usuario42         #+#    #+#              #
-#    Updated: 2023/09/13 10:33:47 by fclaus-g         ###   ########.fr        #
+#    Updated: 2023/09/18 13:37:05 by fclaus-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
-CC = gcc
+CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror -pthread
 RM = rm -f
 

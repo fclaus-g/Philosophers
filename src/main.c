@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/18 12:40:28 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:47:32 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_check_args(int ac, char **av)
 	int	c;
 
 	i = 1;
-
 	if (ac < 5 || ac > 6)
 	{
 		ft_werror("Error: Número de args invalido\n", 2);
@@ -51,20 +50,16 @@ int	ft_check_args(int ac, char **av)
 	return (0);
 }
 
-
-
 /*nuestra rutina o trabajo que realizaran los philos
  durante la ejecucion del programa*/
-void	*ft_routine(void *philo)
+void	*ft_routine(void *arg)
 {
-	t_philo *phil;
-	int id;
+	t_philo	*philo;
 
-
-	phil = (t_philo*)philo;
-	id = phil->id;
-	printf("rutina [%d] creada\n", phil->id);
-	if (phil->id % 2 == 0)
+	philo = (t_philo *)arg;
+	printf("philo %d recibido\n", philo->id);
+	write(1, "a", 1);
+	if ((philo)->id % 2 == 0)
 	{
 		ft_sleep(philo);
 		ft_think(philo);

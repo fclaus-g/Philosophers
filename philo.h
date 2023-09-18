@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/13 11:53:43 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:28:00 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ typedef struct s_philo
 	int				last_eat;
 	t_data			*data;
 	pthread_t		thread;
-	pthread_mutex_t	*fork_l;
-	pthread_mutex_t	*fork_r;
 }					t_philo;
 
 /*Creamos una estructura data que va a contener todos los datos generales referentes al programa*/
@@ -50,15 +48,16 @@ typedef struct s_data
 	int				t_sleep;
 	int				eat_times;
 	int				dead;
-	int				*fork;
 	t_philo			*philo;//creamos un puntero a una estructura philo para poder crear un array de philos
+	pthread_t		*monitor;
+	pthread_mutex_t	*fork;
 }					t_data;
 
 /*init.c*/
 void	ft_init_data(int ac, char **av, t_data *data);
 void	ft_init_philos(t_data *data);
 void	ft_init_threads(t_data *data);
-void	ft_init_mutex(t_philo *philo);
+void	ft_init_mutex(t_data *data);
 
 /*action.c*/
 void	ft_take_forks(t_philo *philos);
@@ -69,6 +68,7 @@ void	ft_drop_forks(t_philo *philo);
 void	ft_die(t_philo *philo);
 
 int		ft_check_args(int ac, char **av);
-void	ft_routine(t_philo *philo);
+void	*ft_routine(void *philo);
 void	ft_werror(char *str, int out);
+time_t	ft_get_time(void);
 #endif

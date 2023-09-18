@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/13 12:10:54 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:27:36 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ void	ft_init_data(int ac, char **av, t_data *data)
 		ft_werror("Error: malloc\n", 2);
 		return ;
 	}
-	while (i++ < data->forks)
-	{
-		data->fork[i] = 0;
-		printf(ORANGE"fork[%d] creado\n", i);
-	}
 	printf(BLUE"philos: %d\nt_die: %d\nt_eat: %d\nt_sleep: %d\neat_times: %d\n"RESET, data->philos, data->t_die, data->t_eat, data->t_sleep, data->eat_times);
 }
 /*iniciamos los philos con un bucle asignandole los datos a cada uno 
@@ -53,7 +48,7 @@ void	ft_init_philos(t_data *data)
 {
 	int	i;
 
-	i = -1;
+	i = - 1;
 	data->philo = malloc(sizeof(t_philo) * data->philos + 1);
 	if (!data->philo)
 	{
@@ -73,39 +68,18 @@ void	ft_init_philos(t_data *data)
 los forks antes que algun filo acceda, he visto dos formas de mutear, 
 al fork o al philo, de momento me decanto por el fork y ver como va funcionando*/
 
-void	ft_init_mutex(t_philo *philo)
+void	ft_init_mutex(t_data *data)
 {
 	int	i;
 
 	i = -1;
-	printf("iniciando mutex");
-	while (++i)
+	while (++i < data->forks)
 	{
-		philo[i].fork_l = malloc(sizeof(pthread_mutex_t) * philo->data->forks + 1);
-		if (!philo[i].fork_l)
-		{
-			ft_werror("Error: malloc\n", 2);
-			return ;
-		}
-		philo[i].fork_r = malloc(sizeof(pthread_mutex_t) * philo->data->forks + 1);
-		if (!philo[i].fork_r)
-		{
-			ft_werror("Error: malloc\n", 2);
-			return ;
-		}
-		if (pthread_mutex_init(&philo->fork_l[i], NULL) != 0)
-		{
-			ft_werror("Error: mutex init\n", 2);
-			return;
-		}
-		printf(BLUE"mutex fork_l[%d] creado\n", i);
-		if (pthread_mutex_init(&philo->fork_r[i], NULL) != 0)
-		{
-			ft_werror("Error: mutex init\n", 2);
-			return ;
-		}
-		printf(BLUE"mutex fork_r[%d] creado\n"RESET, i);
+		pthread_mutex_init(&data->fork[i], NULL);
+		printf(BLUE"mutex %d creado\n"RESET, i);
 	}
+
+
 }
 /*una vez tenemos los philos y los forks creamos los hilos, a tener en cuenta
  que un philo no es mas que una estructura con info sobre el philo y el hilo o 
@@ -116,10 +90,13 @@ void	ft_init_threads(t_data *data)
 	int	i;
 
 	i = -1;
+	data->philo->thread = malloc(sizeof(pthread_t) * data->philos + 1);
 	while (++i < data->philos)
 	{
 		if(pthread_create(&data->philo[i].thread, NULL, (void*)&ft_routine, &data->philo[i]) != 0)
 			return (ft_werror("Error: pthread_create\n", 2));
+		printf(ORANGE"PHILO Nº%d enviado al hilo %d\n"RESET, i, i);
+		printf(RED"thread[%d] creado\n"RESET, i);
 		usleep(500);
 	}
 }

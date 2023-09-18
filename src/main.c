@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/13 12:10:48 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:40:28 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,16 @@ int	ft_check_args(int ac, char **av)
 
 /*nuestra rutina o trabajo que realizaran los philos
  durante la ejecucion del programa*/
-void	ft_routine(t_philo *philo)
+void	*ft_routine(void *philo)
 {
-	printf(BLUE"thread[%d] creado\n"RESET, philo->id);
-	if (philo->id % 2 == 0)
+	t_philo *phil;
+	int id;
+
+
+	phil = (t_philo*)philo;
+	id = phil->id;
+	printf("rutina [%d] creada\n", phil->id);
+	if (phil->id % 2 == 0)
 	{
 		ft_sleep(philo);
 		ft_think(philo);
@@ -66,13 +72,11 @@ void	ft_routine(t_philo *philo)
 	}
 	else
 	{
-		ft_take_forks(philo);
 		ft_eat(philo);
-		ft_drop_forks(philo);
 		ft_sleep(philo);
 		usleep(1000000);
 	}
-
+	return (NULL);
 }
 
 int	main(int ac, char **av)
@@ -85,7 +89,7 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	ft_init_data(ac, av, data);
 	ft_init_philos(data);
-	ft_init_mutex(data->philo);
+	ft_init_mutex(data);
 	ft_init_threads(data);
 	return (0);
 }

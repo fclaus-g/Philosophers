@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:20:10 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/13 12:12:16 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:25:14 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->fork_l[philo->id]);
+	pthread_mutex_lock(&philo->data->fork[philo->id - 1]);
 	printf("philo[%d] ha tomado el tenedor izquierdo\n", philo->id);
-	pthread_mutex_lock(&philo->fork_r[philo->id]);
+	pthread_mutex_lock(&philo->data->fork[philo->id]);
 	printf("philo[%d] ha tomado el tenedor derecho\n", philo->id);
 }
 void ft_eat(t_philo *philo)

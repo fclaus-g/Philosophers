@@ -49,6 +49,8 @@
 		return (0);
 	}
 ```
+* **clock_gettime** calcula el tiempo transcurrido en un bloque de código en C, no esta permitida en este proyecto pero merece
+	la pena mencionarla para futuros proyectos.
 
 * **pthread_create** -> crea un hilo. Prototipo:
 	**_int pthread_create(pthread_t *thread, const pthread_attr_t *attr,

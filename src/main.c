@@ -6,21 +6,11 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/18 13:47:32 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:19:03 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-
-void	ft_werror(char *str, int out)
-{
-	int	c;
-
-	c = 0;
-	while (str[c])
-		c++;
-	write(out, str, c);
-}
 
 /*chequeamos que los arg son correctos sean numeros y haya 5 o 6 args*/
 int	ft_check_args(int ac, char **av)
@@ -58,8 +48,7 @@ void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	printf("philo %d recibido\n", philo->id);
-	write(1, "a", 1);
-	if ((philo)->id % 2 == 0)
+	if ((philo)->id % 2)
 	{
 		ft_sleep(philo);
 		ft_think(philo);

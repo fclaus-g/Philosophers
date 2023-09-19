@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/18 14:11:03 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:43:19 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo
 	int				last_eat;
 	t_data			*data;
 	pthread_t		thread;
+	pthread_mutex_t	*print;
 }					t_philo;
 
 /*Creamos una estructura data que va a contener todos los datos generales referentes al programa*/
@@ -48,8 +49,9 @@ typedef struct s_data
 	int				t_sleep;
 	int				eat_times;
 	int				dead;
+	int				start_time;
 	t_philo			*philo;//creamos un puntero a una estructura philo para poder crear un array de philos
-	pthread_t		*monitor;
+	pthread_t		monitor;
 	pthread_mutex_t	*fork;
 }					t_data;
 
@@ -71,4 +73,7 @@ int		ft_check_args(int ac, char **av);
 void	*ft_routine(void *arg);
 void	ft_werror(char *str, int out);
 time_t	ft_get_time(void);
+void	*ft_monitoring(void	*arg);
+void	ft_end(t_data *data);
+void	ft_print_action(char *str, t_philo *philo, int id);
 #endif

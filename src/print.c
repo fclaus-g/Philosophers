@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 13:18:09 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/09/19 13:43:24 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/20 10:59:10 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_print_action(char *str, t_philo *philo, int id)
 	time_t	time;
 
 	pthread_mutex_lock(philo->print);
-	time = ft_get_time() - philo->data->start_time;
-	printf("[      %ld]--philo[%d]--%s\n", time, id, str);
+	time = ft_timedif(philo->data->start_time, ft_get_time());
+	printf("[%ld]--philo[%d]--%s\n", time, id, str);
+	pthread_mutex_unlock(philo->print);
 }

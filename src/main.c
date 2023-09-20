@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/19 13:19:03 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/20 10:29:28 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,33 @@ void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	printf("philo %d recibido\n", philo->id);
-	if ((philo)->id % 2)
+	while (philo->data->dead == 0)
 	{
-		ft_sleep(philo);
-		ft_think(philo);
-		ft_eat(philo);
-	}
-	else
-	{
-		ft_eat(philo);
-		ft_sleep(philo);
-		usleep(1000000);
+		if ((philo)->id % 2)
+		{
+			ft_sleep(philo);
+			ft_think(philo);
+			ft_eat(philo);
+		}
+		else
+		{
+			ft_eat(philo);
+			ft_sleep(philo);
+			usleep(1000000);
+		}
 	}
 	return (NULL);
+}
+
+void	ft_join(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->philos)
+	{
+		pthread_join(data->philo[i].thread, NULL);
+	}
 }
 
 int	main(int ac, char **av)
@@ -75,5 +89,6 @@ int	main(int ac, char **av)
 	ft_init_philos(data);
 	ft_init_mutex(data);
 	ft_init_threads(data);
+	ft_join(data);
 	return (0);
 }

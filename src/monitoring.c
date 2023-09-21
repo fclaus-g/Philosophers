@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:05:41 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/09/20 13:22:27 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:40:56 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	*ft_monitoring(void *arg)
 			{
 				data->dead = 1;
 				ft_print_action("ha muerto", &data->philo[i], data->philo[i].id);
-				ft_end(data);
-				
+				//ft_end(data);
+				exit(0);
 			}	
 			if (data->philo[i].eat_times == data->eat_times)
 			{
@@ -47,8 +47,8 @@ void	ft_end(t_data *data)
 	i = -1;
 	while (++i < data->philos)
 	{
-		pthread_mutex_destroy(&data->fork[i]);
-		free(&data->philo[i].thread);
+		//pthread_mutex_destroy(&data->fork[i]);
+		//free(&data->philo[i].thread);
 		free(&data->philo[i]);
 	}
 	free(data);

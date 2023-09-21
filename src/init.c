@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/20 12:53:28 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:31:43 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_init_philos(t_data *data)
 		data->philo[i].id = i + 1;
 		data->philo[i].eat_times = 0;
 		data->philo[i].last_eat = 0;
+		data->philo[i].eating = 0;
 		data->philo[i].data = data;
 		data->philo[i].print = malloc(sizeof(pthread_mutex_t));
 		if (!data->philo[i].print)
@@ -117,5 +118,4 @@ void	ft_init_threads(t_data *data)
 		printf(RED"thread[%d] creado\n"RESET, i);
 		//usleep(500);
 	}
-
 }

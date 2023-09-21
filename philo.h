@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/20 11:40:42 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:27:35 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define ORANGE "\033[0;38;5;208m"
 # define RESET "\033[0m"
 
-# include "../libft/libft.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -34,6 +33,7 @@ typedef struct s_philo
 	int				id;
 	int				eat_times;
 	int				last_eat;
+	int				eating;
 	t_data			*data;
 	pthread_t		thread;
 	pthread_mutex_t	*print;

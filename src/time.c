@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:09:12 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/09/20 10:55:39 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:34:38 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ time_t	ft_get_time(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-time_t ft_timedif(time_t before, time_t now)
+time_t	ft_timedif(time_t before, time_t now)
 {
 	return (now - before);
 }

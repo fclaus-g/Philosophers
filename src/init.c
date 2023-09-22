@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/21 13:31:43 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:46:43 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_init_data(int ac, char **av, t_data *data)
 		data->eat_times = atoi(av[5]);
 	else
 		data->eat_times = -1;
+	data->finished = 0;
 	data->dead = 0;
 	data->fork = malloc(sizeof(int) * data->forks + 1);
 	if (!data->fork)

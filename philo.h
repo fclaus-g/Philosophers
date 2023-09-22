@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/21 10:27:35 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:46:27 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 	int				t_eat;
 	int				t_sleep;
 	int				eat_times;
+	int				finished;
 	int				dead;
 	time_t				start_time;
 	t_philo			*philo;//creamos un puntero a una estructura philo para poder crear un array de philos

@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:05:41 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/09/21 13:40:56 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:20:11 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,30 @@
 
 void	*ft_monitoring(void *arg)
 {
-	t_data	*data;
+	t_data	data;
 	int		i;
 
-	data = (t_data *)arg;
-	while (data->dead == 0)
+	data = *(t_data *)arg;
+	while (data.dead == 0)
 	{
 		i = -1;
-		while (++i < data->philos)
+		while (++i < data.philos)
 		{
-			if (ft_timedif(data->philo[i].last_eat, ft_get_time()) > data->t_die)
+			pthread_mutex_lock(data.philo[i].print);
+			printf("last eat philo[%d] = %d, tiempo actual = %ld\n", i, data.philo[i].last_eat, ft_get_time());
+			pthread_mutex_unlock(data.philo[i].print);
+			if (ft_timedif(data.philo[i].last_eat, ft_get_time()) > data.t_die)
 			{
-				data->dead = 1;
-				ft_print_action("ha muerto", &data->philo[i], data->philo[i].id);
+				data.dead = 1;
+				printf(RED"ALGUIEN HA MUERTO\n"RESET);
+				
 				//ft_end(data);
-				exit(0);
-			}	
-			if (data->philo[i].eat_times == data->eat_times)
+				exit(1);
+			}
+			ft_print_action("ha muerto\n", &data.philo[i], data.philo[i].id);
+			if (data.philo[i].eat_times == data.eat_times)
 			{
-				ft_end(data);//PENDIENTE DE REVISAR
+				data.finished++;
 			}	
 		}
 	}

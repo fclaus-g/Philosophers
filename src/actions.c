@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:20:10 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/21 13:23:59 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:21:34 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_sleep(t_philo *philo)
 void	ft_think(t_philo *philo)
 {
 	ft_print_action("esta pensando", philo, philo->id);
-	ft_usleep(100);
+	ft_usleep(philo->data->t_eat - philo->data->t_sleep);
 }
 /*COMPROBAR BIEN LA MANO DEL PHILO*/
 void	ft_drop_forks(t_philo *philo)

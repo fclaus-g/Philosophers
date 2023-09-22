@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/20 10:29:28 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/22 10:50:04 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	*ft_routine(void *arg)
 		{
 			ft_eat(philo);
 			ft_sleep(philo);
-			usleep(1000000);
+			ft_think(philo);
 		}
 	}
 	return (NULL);

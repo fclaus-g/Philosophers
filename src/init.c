@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/22 11:46:43 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:46:38 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,8 @@ void	ft_init_mutex(t_data *data)
 			return (ft_werror("Error Mutex Init", 2));
 		printf(BLUE"mutex %d creado\n"RESET, i);
 	}
-
-
 }
+
 /*una vez tenemos los philos y los forks creamos los hilos, a tener en cuenta
  que un philo no es mas que una estructura con info sobre el philo y el hilo o 
 thread es el subproceso que cambiara los valores de los datos nuestra struct*/
@@ -100,13 +99,12 @@ void	ft_init_threads(t_data *data)
 {
 	int	i;
 
-
 	i = -1;
 	data->monitor = malloc(sizeof(pthread_t));
 	if (!data->monitor)
 		return (ft_werror("Error malloc monitor", 2));
-	if (pthread_create(&data->monitor, NULL, (void *)&ft_monitoring, &data) != 0)
-		return (ft_werror("Error: monitor create", 2));
+	if (pthread_create(&data->monitor, NULL, (void *)&ft_monitoring, &data->philo) != 0)
+	 	return (ft_werror("Error: monitor create", 2));
 	printf(RED"monitor creado\n"RESET);
 	while (++i < data->philos)
 	{

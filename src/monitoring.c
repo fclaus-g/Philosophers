@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:05:41 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/09/22 18:04:01 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/26 10:48:49 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_monitoring(void *arg)
 	data = (t_data *)arg;
 	data->mutexmon = malloc(sizeof(pthread_mutex_t));
 	if (pthread_mutex_init(data->mutexmon, NULL) != 0)
-		ft_werror("Error mutex monitor", 2);
+	 	ft_werror("Error mutex monitor", 2);
 	while (1)
 	{
 		i = -1;
@@ -34,7 +34,7 @@ void	*ft_monitoring(void *arg)
 			}
 		}
 	}
-	pthread_mutex_destroy(data->mutexmon);
+	//pthread_mutex_destroy(data->mutexmon);
 	return (NULL);
 }
 

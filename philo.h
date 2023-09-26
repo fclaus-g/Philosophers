@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/22 16:41:47 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/26 09:59:10 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,24 @@
 # include <sys/time.h>//cabecera para gettimeofday
 /*nombramos la struct para que t_philo la reconozca*/
 typedef struct s_data	t_data;
-/*Creamos una struct con los datos que va a manejar cada philo*/
+/**
+ * @brief 
+ * * las variables l_fork y r_fork no son mas que el índice
+ * * de los forks no los forks en si. Los fork serian el 
+ * * array de mutex
+ */
+
 typedef struct s_philo
 {
 	int				id;
 	int				eat_times;
 	int				last_eat;
 	int				eating;
+	int				l_fork;
+	int				r_fork;
 	t_data			*data;
 	pthread_t		thread;
-	pthread_mutex_t	*print;
+	pthread_mutex_t	print;
 }					t_philo;
 
 /*Creamos una estructura data que va a contener todos los datos generales referentes al programa*/
@@ -50,12 +58,13 @@ typedef struct s_data
 	int				eat_times;
 	int				finished;
 	int				dead;
-	time_t				start_time;
+	time_t			start_time;
 	t_philo			*philo;//creamos un puntero a una estructura philo para poder crear un array de philos
 	pthread_t		monitor;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	*mutexmon;
+	pthread_mutex_t	mutexmon;
 }					t_data;
+
 
 /*init.c*/
 void	ft_init_data(int ac, char **av, t_data *data);
@@ -80,4 +89,7 @@ void	ft_end(t_data *data);
 void	ft_print_action(char *str, t_philo *philo, int id);
 time_t	ft_timedif(time_t before, time_t now);
 int		ft_usleep(size_t mseconds);
+void	ft_join(t_data *data);
+int		ft_atoi_ph(char *str);
+
 #endif

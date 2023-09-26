@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 13:18:09 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/09/26 10:49:59 by fclaus-g         ###   ########.fr       */
+/*   Created: 2023/09/25 13:16:18 by fclaus-g          #+#    #+#             */
+/*   Updated: 2023/09/25 13:29:38 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	ft_werror(char *str, int out)
+int	ft_atoi_ph(char *str)
 {
-	int	c;
+	size_t	count;
+	size_t	result;
+	int		sign;
 
-	c = 0;
-	while (str[c])
-		c++;
-	write(out, str, c);
-}
-
-void	ft_print_action(char *str, t_philo *philo, int id)
-{
-	time_t	time;
-
-	//pthread_mutex_lock(philo->print);
-	time = ft_timedif(philo->data->start_time, ft_get_time());
-	printf("[%ld]--philo[%d]--%s\n", time, id, str);
-	//pthread_mutex_unlock(philo->print);
+	count = 0;
+	result = 0;
+	sign = 1;
+	while ((str[count] >= 9 && str[count] <= 13) || str[count] == 32)
+		count++;
+	if (str[count] == '-' || str[count] == '+')
+	{
+		if (str[count] == '-')
+			sign = -1;
+		count++;
+	}
+	while (str[count] >= '0' && str[count] <= '9')
+	{
+		result = result * 10 + str[count] - 48;
+		count++;
+	}
+	return (sign * result);
 }

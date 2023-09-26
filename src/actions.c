@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:20:10 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/22 18:36:56 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/26 10:59:06 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	ft_take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->fork[philo->id - 1]);
-	ft_print_action("ha tomado el tenedor derecho\n", philo, philo->id);
-	pthread_mutex_lock(&philo->data->fork[philo->id]);
-	ft_print_action("ha tomado el tenedor izquierdo\n", philo, philo->id);
+	pthread_mutex_lock(&philo->data->fork[philo->r_fork]);
+	printf(YELLOW"[timestamp]--philo[%d]--ha tomado el tededor derecho[%d]\n"RESET, philo->id, philo->r_fork);
+	// ft_print_action("ha tomado el tenedor derecho\n", philo, philo->r_fork);
+	// printf(RED"fork[%d]\n"RESET, philo->r_fork);
+	pthread_mutex_lock(&philo->data->fork[philo->l_fork]);
+	printf(YELLOW"[timestamp]--philo[%d]--ha tomado el tededor izquierdo[%d]\n"RESET, philo->id, philo->l_fork);
+	// printf(RED"fork[%d]\n"RESET, philo->l_fork);
+	// ft_print_action("ha tomado el tenedor izquierdo\n", philo, philo->l_fork);
 }
 
 void	ft_eat(t_philo *philo)

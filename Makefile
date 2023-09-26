@@ -6,7 +6,7 @@
 #    By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/25 11:01:55 by usuario42         #+#    #+#              #
-#    Updated: 2023/09/19 13:38:06 by fclaus-g         ###   ########.fr        #
+#    Updated: 2023/09/26 10:49:24 by fclaus-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror -pthread
 RM = rm -f
 
-SRC = src/main.c src/init.c src/actions.c src/time.c src/monitoring.c src/print.c
+SRC = src/main.c src/init.c src/actions.c src/time.c src/print.c src/utils.c
 OBJ = $(SRC:.c=.o)
 
 

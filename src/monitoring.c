@@ -6,51 +6,88 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:05:41 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/09/26 10:48:49 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:35:24 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	*ft_monitoring(void *arg)
+int	ft_checkeats(t_data *data)
 {
-	t_data	*data;
-	int	i;
-
-	data = (t_data *)arg;
-	data->mutexmon = malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(data->mutexmon, NULL) != 0)
-	 	ft_werror("Error mutex monitor", 2);
-	while (1)
+	if (data->eat_times != -1)
 	{
-		i = -1;
-		while (++i < data->philos)
+		if (data->philo[0].eat_times == data->eat_times)
 		{
-			if (data->philo[i].last_eat - ft_get_time() > data->t_die)
-			{
-				data->dead = 1;
-				ft_print_action("MUERTO MORIO\n", &data->philo[i], data->philo[i].id);
-				break ;
-			}
+			data->finished = 1;
+			return (1);
 		}
 	}
-	//pthread_mutex_destroy(data->mutexmon);
-	return (NULL);
+	while (1)
+	{
+		if (data->finished == data->philos - 1)
+			return (1);
+	}
+	return (0);
 }
-
-
-void	ft_end(t_data *data)
+int	ft_checkdeath(t_data *data)
 {
 	int	i;
-
-	i = -1;
-	while (++i < data->philos)
+	// if (pthread_mutex_init(&data->muteat, NULL) != 0)
+	// 	return (ft_werror("Error mutexmon\n", 2), 0);
+	printf(RED"CHECKDEATH data->dead = %d\n"RESET, data->dead);
+	while (1)
 	{
-		//pthread_mutex_destroy(&data->fork[i]);
-		//free(&data->philo[i].thread);
-		free(&data->philo[i]);
+		i = 0;
+		while (i < data->philos)
+		{
+			if (pthread_mutex_lock(&data->philo[i].muteat) != 0)
+				return (ft_werror("Error lock mutexmon", 2), 0);
+			printf(RED"CHECKDEATH get time - last eat = %ld t_die = %d, total = %ld\n"RESET, ft_get_time() - data->philo[i].last_eat, data->t_die, ft_get_time() - data->philo[i].last_eat);
+			if ((ft_get_time() - data->philo[i].last_eat ) >= data->t_die)
+			{
+				data->dead = 1;
+				return (1);
+			}
+			if (pthread_mutex_unlock(&data->philo[i].muteat) != 0)
+				return (ft_werror("Error unlock mutexmon", 2), 0);
+			i++;
+		}
 	}
-	free(data);
+	return (0);
 }
+
+/*
+	*ft_monitoring viniendo de 
+	*pthread_create(&data->monitor, NULL, (void *)&ft_monitoring, &data)
+	*recibe doble puntero de arg (**arg) para acceder a los datos
+	de la estructura de forma correcta de otra manera los datos recibidos 
+	serian direcciones de memoria
+*/
+void	ft_monitoring(void **arg)
+{
+	t_data	*data;
+	//int		i;
+
+	data = (t_data *)(*arg);
+	while (1)
+	{
+		if (ft_checkdeath(data))
+		{
+			printf(RED"ALERTA DE MUERTE\n"RESET);
+			ft_end(data);
+			//break;
+		}
+		if (ft_checkeats(data))
+		{
+			printf(RED"ALERTA DE COMIDA\n"RESET);
+			ft_end(data);
+			break;
+		}
+	}
+	
+}
+
+
+
 
 

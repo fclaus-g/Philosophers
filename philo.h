@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/26 09:59:10 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:00:27 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ typedef struct s_philo
 {
 	int				id;
 	int				eat_times;
-	int				last_eat;
+	time_t			last_eat;
 	int				eating;
 	int				l_fork;
 	int				r_fork;
 	t_data			*data;
 	pthread_t		thread;
-	pthread_mutex_t	print;
+	pthread_mutex_t	muteat;
 }					t_philo;
 
 /*Creamos una estructura data que va a contener todos los datos generales referentes al programa*/
@@ -61,8 +61,10 @@ typedef struct s_data
 	time_t			start_time;
 	t_philo			*philo;//creamos un puntero a una estructura philo para poder crear un array de philos
 	pthread_t		monitor;
+	pthread_mutex_t	print;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	mutexmon;
+	pthread_mutex_t	mutedead;
 }					t_data;
 
 
@@ -84,7 +86,7 @@ int		ft_check_args(int ac, char **av);
 void	*ft_routine(void *arg);
 void	ft_werror(char *str, int out);
 time_t	ft_get_time(void);
-void	*ft_monitoring(void	*arg);
+void	ft_monitoring(void	**arg);
 void	ft_end(t_data *data);
 void	ft_print_action(char *str, t_philo *philo, int id);
 time_t	ft_timedif(time_t before, time_t now);

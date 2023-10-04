@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:09:12 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/09/27 13:40:26 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/03 09:51:42 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ time_t	ft_get_time(void)
 time_t	ft_timedif(time_t before, time_t now)
 {
 	return (now - before);
+}
+
+time_t	ft_now(t_data *data)
+{
+	return (ft_get_time() - data->start_time);
 }
 
 int	ft_usleep(size_t mseconds)

@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/29 13:00:27 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:10:38 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_data
 	int				t_die;
 	int				t_eat;
 	int				t_sleep;
+	//int				t_think;
 	int				eat_times;
 	int				finished;
 	int				dead;
@@ -93,5 +94,8 @@ time_t	ft_timedif(time_t before, time_t now);
 int		ft_usleep(size_t mseconds);
 void	ft_join(t_data *data);
 int		ft_atoi_ph(char *str);
+time_t	ft_now(t_data *data);
+int		ft_checkdeath(t_data *data);
+int		ft_philo_died(t_philo *philo);
 
 #endif

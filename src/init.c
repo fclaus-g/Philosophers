@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/29 13:01:11 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:42:19 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_init_data(int ac, char **av, t_data *data)
 	data->t_die = ft_atoi_ph(av[2]);
 	data->t_eat = ft_atoi_ph(av[3]);
 	data->t_sleep = ft_atoi_ph(av[4]);
+	//data->t_think = data->t_die - (data->t_eat + data->t_sleep);
 	if (ac == 6)
 		data->eat_times = ft_atoi_ph(av[5]);
 	else
@@ -31,7 +32,8 @@ void	ft_init_data(int ac, char **av, t_data *data)
 	data->dead = 0;
 	data->start_time = ft_get_time();
 	printf(ORANGE"start time [%ld]\n"RESET, data->start_time);
-	printf(BLUE"philos: %d\nt_die: %d\nt_eat: %d\nt_sleep: %d\neat_times: %d\n"RESET, data->philos, data->t_die, data->t_eat, data->t_sleep, data->eat_times);
+	printf(ORANGE"ft_now [%ld]\n"RESET, ft_now(data));
+	//printf(BLUE"philos: %d\nt_die: %d\nt_eat: %d\nt_sleep: %d\neat_times: %d\n t_THINK :%d\n"RESET, data->philos, data->t_die, data->t_eat, data->t_sleep, data->eat_times, data->t_think);
 }
 /*iniciamos los philos con un bucle asignandole los datos a cada uno 
 de ellos asi tendremos un array de philo[x] donde x es el numero de 
@@ -53,7 +55,7 @@ void	ft_init_philos(t_data *data)
 	{
 		data->philo[i].id = i + 1;
 		data->philo[i].eat_times = 0;
-		data->philo[i].last_eat = data->start_time;
+		data->philo[i].last_eat = ft_get_time();
 		data->philo[i].eating = 0;
 		data->philo[i].data = data;
 		data->philo[i].r_fork = i;

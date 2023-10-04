@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/09/29 13:14:02 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:05:47 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*ft_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	//printf("philo %d recibido\ndata dead = %d\n", philo->id, philo->data->dead);
-	while (philo->data->dead == 0)
+	while (1)
 	{
 		// pthread_mutex_lock(&philo->data->mutedead);
 		// if (philo->data->dead == 1)
@@ -56,6 +56,7 @@ void	*ft_routine(void *arg)
 		// pthread_mutex_unlock(&philo->data->mutedead);
 		if (philo->id % 2)
 		{
+			//usleep(200);
 			ft_think(philo);
 			ft_eat(philo);
 			ft_sleep(philo);

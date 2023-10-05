@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:09:12 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/10/03 09:51:42 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/05 12:37:36 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_usleep(size_t mseconds)
 	start = ft_get_time();
 	while ((ft_get_time() - start) < mseconds)
 	{
-		usleep (500);
+		usleep (50);
 	}
 	return (0);
 }

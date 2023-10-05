@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/04 13:05:47 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:44:59 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ void	ft_join(t_data *data)
 	int	i;
 
 	i = -1;
-	pthread_join(data->monitor, NULL);
+	
 	while (++i < data->philos)
 	{
 		pthread_join(data->philo[i].thread, NULL);
 	}	
-	
+	pthread_join(data->monitor, NULL);
 }
 
 int	main(int ac, char **av)

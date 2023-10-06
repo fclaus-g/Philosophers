@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/05 10:44:59 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:17:01 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ void	ft_join(t_data *data)
 	pthread_join(data->monitor, NULL);
 }
 
+static void	ft_leaks(void)
+{
+	system("leaks -q philo");
+}
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -98,5 +102,6 @@ int	main(int ac, char **av)
 	ft_init_threads(&data);
 	ft_join(&data);
 	ft_end(&data);
+	atexit(ft_leaks);
 	return (0);
 }

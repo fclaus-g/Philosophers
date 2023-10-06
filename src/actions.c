@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:20:10 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/05 12:38:19 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:41:20 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,24 @@ void	ft_eat(t_philo *philo)
 
 void	ft_sleep(t_philo *philo)
 {
-	ft_print_action("está durmiendo", philo, philo->id);
-	ft_usleep(philo->data->t_sleep);
+	pthread_mutex_lock(&philo->data->mutedead);
+	if (philo->data->dead == 0)
+	{
+		ft_print_action("está durmiendo", philo, philo->id);
+		ft_usleep(philo->data->t_sleep);
+	}
+	pthread_mutex_unlock(&philo->data->mutedead);
 }
 
 void	ft_think(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->data->mutedead);
 	if (philo->data->dead == 0)
 	{
 		ft_print_action("esta pensando", philo, philo->id);
-		//ft_usleep(100);
+		//ft_usleep(10);
 	}
+	pthread_mutex_unlock(&philo->data->mutedead);
 }
 /*COMPROBAR BIEN LA MANO DEL PHILO*/
 void	ft_drop_forks(t_philo *philo)

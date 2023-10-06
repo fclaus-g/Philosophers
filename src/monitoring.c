@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:05:41 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/10/05 12:48:25 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/06 11:46:03 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,29 @@
 int	ft_checkeats(t_data *data)
 {
 	int	i;
-	//int eats;
 
-/* 	while (1)
-	{ */
-		
-		i = 0;
-		if (data->eat_times != -1)
+	i = 0;
+	if (data->eat_times != -1)
+	{
+		while (i < data->philos)
 		{
-			while (i < data->philos)
-			{
-				pthread_mutex_lock(&data->philo[i].muteat);
-				if (data->philo[i].eat_times == data->eat_times)
-				{
-					printf(YELLOW"i = %d\n", i);
-					printf(ORANGE"COMIDA COMPLETA philo %d, times %d \n", data->philo[i].id, data->eat_times);
-					data->finished++;
-				}
-				pthread_mutex_unlock(&data->philo[i].muteat);
-				i++;
-			}
 			pthread_mutex_lock(&data->philo[i].muteat);
-			if (data->finished == data->philos)
+			if (data->philo[i].eat_times == data->eat_times)
 			{
-				printf(YELLOW"COMIDA COMPLETA philo %d, times %d \n"RESET, data->finished, data->eat_times);
-				return (pthread_mutex_unlock(&data->philo[i].muteat), 1);
-			}	
+				printf(YELLOW"i = %d\n", i);
+				printf(ORANGE"COMIDA COMPLETA philo %d, times %d \n", data->philo[i].id, data->eat_times);
+				data->finished++;
+			}
+			pthread_mutex_unlock(&data->philo[i].muteat);
+			i++;
 		}
-/* 	} */
+		pthread_mutex_lock(&data->philo[i].muteat);
+		if (data->finished == data->philos)
+		{
+			printf(YELLOW"COMIDA COMPLETA philo %d, times %d \n"RESET, data->finished, data->eat_times);
+			return (pthread_mutex_unlock(&data->philo[i].muteat), 1);
+		}	
+	}
 	pthread_mutex_unlock(&data->philo[i].muteat);
 	return (0);
 }
@@ -68,33 +63,24 @@ int	ft_philo_died(t_philo *philo)
 int	ft_checkdeath(t_data *data)
 {
 	int	i;
-	// if (pthread_mutex_init(&data->muteat, NULL) != 0)
-	// 	return (ft_werror("Error mutexmon\n", 2), 0);
-	//printf(RED"CHECKDEATH data->dead = %d\n"RESET, data->dead);
-/* 	while (1)
-	{ */
-		i = 0;
-		while (i < data->philos)
+
+	i = 0;
+	while (i < data->philos)
+	{
+		if (ft_philo_died(&data->philo[i]))
 		{
-			
-			//printf(RED"CHECKDEATH philo id = %d last eat = %ld now =%ld t_die = %d\n"RESET, data->philo[i].id, ft_get_time() - data->philo[i].last_eat, ft_get_time(), data->t_die);
-			//if ((ft_get_time() - data->philo[i].last_eat) >= data->t_die)
-			//pthread_mutex_lock(&data->mutexmon);
-			if (ft_philo_died(&data->philo[i]))
-			{
-				if (pthread_mutex_lock(&data->mutedead) != 0)
-					return (ft_werror("Error lock muteat", 2), 0);
-				data->dead = 1;
-				ft_die(&data->philo[i]);
-				ft_print_action("MUERTO", &data->philo[i], data->philo[i].id);
-				if (pthread_mutex_unlock(&data->mutedead) != 0)
-					return (ft_werror("Error unlock mutexmon", 2), 0);
-				return (1);
-			}
-			//pthread_mutex_unlock(&data->mutexmon);
-			i++;
+			if (pthread_mutex_lock(&data->mutedead) != 0)
+				return (ft_werror("Error lock muteat", 2), 0);
+			data->dead = 1;
+			ft_die(&data->philo[i]);
+			ft_print_action("MUERTO", &data->philo[i], data->philo[i].id);
+			if (pthread_mutex_unlock(&data->mutedead) != 0)
+				return (ft_werror("Error unlock mutexmon", 2), 0);
+			return (1);
 		}
-/* 	} */
+		//pthread_mutex_unlock(&data->mutexmon);
+		i++;
+	}
 	return (0);
 }
 
@@ -112,19 +98,19 @@ void	ft_monitoring(void **arg)
 
 	data = (t_data *)(*arg);
 	//ft_usleep(data->t_die);
-	while (1)
+	while (data->dead == 0)
 	{
 		if (ft_checkdeath(data))
 		{
 			printf(RED"ALERTA DE MUERTE\n"RESET);
 			ft_end(data);
-			return ;
+			exit(0);
 		}
 		if (ft_checkeats(data))
 		{
 			printf(RED"ALERTA DE COMIDA\n"RESET);
 			ft_end(data);
-			return ;
+			exit(0);
 		}
 		usleep(50);
 	}	

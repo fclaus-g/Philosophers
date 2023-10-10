@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/06 12:08:40 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:04:10 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,23 @@ void	ft_init_mutex(t_data *data)
 	int	i;
 
 	i = -1;
-	if(pthread_mutex_init(&data->mutedead, NULL) != 0)
-		return (ft_werror("Error mutexdead\n", 2));
-	if (pthread_mutex_init(&(data)->print, NULL) != 0)
-		return (ft_werror("Error mutex print\n", 2));
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->philos);
 	while (++i < data->forks)
 	{
 		if (pthread_mutex_init(&data->fork[i], NULL) != 0)
 			return (ft_werror("Error Mutex Init", 2));
-		if (pthread_mutex_init(&data->philo[i].muteat, NULL))
-			return (ft_werror("Error Muteat Init", 2));
+		// if (pthread_mutex_init(&data->philo[i].muteat, NULL))
+		// 	return (ft_werror("Error Muteat Init", 2));
 		printf(BLUE"mutex %d creado\n"RESET, i);
 	}
+	if (pthread_mutex_init(&data->eatlock, NULL) != 0)
+		return (ft_werror("Error eatlock init\n", 2));
+	if (pthread_mutex_init(&data->deadlock, NULL) != 0)
+		return (ft_werror("Error deadlock init\n", 2));
+	if (pthread_mutex_init(&data->endlock, NULL) != 0)
+		return (ft_werror("Error endlock init\n", 2));
+	if (pthread_mutex_init(&data->printlock, NULL) != 0)
+		return (ft_werror("Error printlock init\n", 2));
 }
 
 /*una vez tenemos los philos y los forks creamos los hilos, a tener en cuenta

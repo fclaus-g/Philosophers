@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/06 13:17:01 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:42:56 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,10 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	//printf("philo %d recibido\ndata dead = %d\n", philo->id, philo->data->dead);
 	while (1)
 	{
-		// pthread_mutex_lock(&philo->data->mutedead);
-		// if (philo->data->dead == 1)
-		// 	break ;
-		// pthread_mutex_unlock(&philo->data->mutedead);
 		if (philo->id % 2)
 		{
-			//usleep(200);
 			ft_think(philo);
 			ft_eat(philo);
 			ft_sleep(philo);
@@ -76,18 +70,18 @@ void	ft_join(t_data *data)
 	int	i;
 
 	i = -1;
-	
+	printf(YELLOW"UNIENDO HILOS\n"RESET);
 	while (++i < data->philos)
 	{
 		pthread_join(data->philo[i].thread, NULL);
 	}	
-	pthread_join(data->monitor, NULL);
 }
 
 static void	ft_leaks(void)
 {
 	system("leaks -q philo");
 }
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -95,13 +89,13 @@ int	main(int ac, char **av)
 	if (ft_check_args(ac, av))
 		return (1);
 	printf("Todo correcto\n");
-	//data = malloc(sizeof(t_data));
+	//data = malloc(sizeof(t_data*));
 	ft_init_data(ac, av, &data);
 	ft_init_philos(&data);
 	ft_init_mutex(&data);
 	ft_init_threads(&data);
 	ft_join(&data);
-	ft_end(&data);
+	//ft_end(&data);
 	atexit(ft_leaks);
 	return (0);
 }

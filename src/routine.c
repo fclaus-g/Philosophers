@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:12:12 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/10/16 20:15:23 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:21:48 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	*ft_only_one(void *arg)
 	ft_print_action("taken a fork\n", philo, philo->id);
 	pthread_mutex_unlock(&philo->data->fork[0]);
 	ft_usleep(philo->data->t_die);
-	ft_print_action("is died\n", philo, philo->id);
+	//ft_print_action("is diedxxxx\n", philo, philo->id);
 	return (NULL);
 }

@@ -5,15 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/25 11:01:55 by usuario42         #+#    #+#              #
-#    Updated: 2023/10/16 20:09:59 by fclaus-g         ###   ########.fr        #
+#    Created: 2023/07/25 11:01:55 by fclaus-g          #+#    #+#              #
+#    Updated: 2023/10/16 21:01:33 by fclaus-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 
 CC = gcc -g
-CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread #-fsanitize=thread
 RM = rm -f
 
 SRC = src/main.c src/init.c src/routine.c src/actions.c src/time.c \

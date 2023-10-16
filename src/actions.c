@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:20:10 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/10 13:34:39 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/16 11:45:55 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,39 @@
 void	ft_take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->fork[philo->r_fork]);
-	ft_print_action("ha tomado el tenedor derecho\n", philo, philo->id);
+	ft_print_action("has taken a fork\n", philo, philo->id);
 	pthread_mutex_lock(&philo->data->fork[philo->l_fork]);
-	ft_print_action("ha tomado el tenedor izquierdo\n", philo, philo->id);
+	ft_print_action("has taken a fork\n", philo, philo->id);
 }
 
 void	ft_eat(t_philo *philo)
 {
 	ft_take_forks(philo);
+	ft_print_action("is eating\n", philo, philo->id);
 	if (pthread_mutex_lock(&philo->data->eatlock))
 		return (ft_werror("Error eatlock  l ft_eat\n", 2));
-	//philo->eating = 1;PDT DE ELIMINAR
+	philo->last_eat = ft_get_time();
 	philo->eat_times++;
-	philo->last_eat = ft_get_time() + philo->data->start_time;
 	if (pthread_mutex_unlock(&philo->data->eatlock))
 		return (ft_werror("Error eatlock u ft_eat\n", 2));
-	ft_print_action("está comiendo\n", philo, philo->id);
 	ft_usleep(philo->data->t_eat);
 	ft_drop_forks(philo);
 }
 
 void	ft_sleep(t_philo *philo)
 {
-	ft_print_action("está durmiendo", philo, philo->id);
+	ft_print_action("is sleeping\n", philo, philo->id);
 	ft_usleep(philo->data->t_sleep);
 }
 
 void	ft_think(t_philo *philo)
 {
-	ft_print_action("esta pensando", philo, philo->id);
-	//ft_usleep(10);
+	ft_print_action("is thinking\n", philo, philo->id);
+	ft_usleep(50);
 }
 
 void	ft_drop_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(&philo->data->fork[philo->l_fork]);
-	ft_print_action("ha soltado el tenedor izquierdo\n", philo, philo->id);
 	pthread_mutex_unlock(&philo->data->fork[philo->r_fork]);
-	ft_print_action("ha soltado el tenedor derecho\n", philo, philo->id);
-}
-
-void	ft_die(t_philo *philo)
-{
-	ft_print_action("ha muerto\n", philo, philo->id);
-	//philo->data->dead = 1;
 }

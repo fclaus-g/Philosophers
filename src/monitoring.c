@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:05:41 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/10/16 13:28:04 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:16:55 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,6 @@ int	ft_checkdeath(t_data *data)
 	return (0);
 }
 
-/*
-	*ft_monitoring viniendo de 
-	*pthread_create(&data->monitor, NULL, (void *)&ft_monitoring, &data)
-	*recibe doble puntero de arg (**arg) para acceder a los datos
-	de la estructura de forma correcta de otra manera los datos recibidos 
-	serian direcciones de memoria
-*/
 void	ft_monitoring(void *arg)
 {
 	t_data	*data;
@@ -68,7 +61,7 @@ void	ft_monitoring(void *arg)
 		}
 		if (ft_checkeats(data))
 		{
-			ft_usleep(10);
+			ft_usleep(15);
 			ft_setend(data);
 			break ;
 		}

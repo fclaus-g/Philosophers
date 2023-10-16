@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:12:12 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/10/16 11:28:42 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/16 20:15:23 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	*ft_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	if (philo->id % 2)
+		ft_usleep(10);
 	while (ft_checkend(philo->data) == 0)
 	{
-		if (philo->id % 2)
-			ft_usleep(10);
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);

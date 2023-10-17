@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:47:24 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/16 21:14:23 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:13:41 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		ft_atoi_ph(char *str);
 int		ft_check_args(int ac, char **av);
 void	ft_join(t_data *data);
 int		ft_check_times(t_data *data);
-void	ft_one_error(t_data *data);
+void	ft_run_threads(t_data *data);
 
 /*init.c*/
 void	ft_init_data(int ac, char **av, t_data *data);

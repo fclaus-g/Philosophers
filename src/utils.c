@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:16:18 by fclaus-g          #+#    #+#             */
-/*   Updated: 2023/10/16 21:15:17 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:19:44 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,15 @@ int	ft_check_times(t_data *data)
 	return (0);
 }
 
-void	ft_one_error(t_data *data)
+void	ft_run_threads(t_data *data)
 {
-	printf("0 1 has taken a fork\n");
-	ft_usleep(data->t_die);
-	printf("%d 1 is died\n", data->t_die);
+	int	i;
+
+	i = -1;
+	while (++i < data->philos)
+	{
+		if (pthread_create(&data->thread[i], NULL, (void *)&ft_routine, \
+			&data->philo[i]) != 0)
+			return (ft_werror("Error: pthread_create\n", 2));
+	}
 }

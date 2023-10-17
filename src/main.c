@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/16 21:30:29 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:19:10 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ int	main(int ac, char **av)
 	ft_init_philos(&data);
 	ft_init_mutex(&data);
 	ft_init_threads(&data);
-	ft_end(&data);
 	return (0);
 }

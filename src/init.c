@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/16 21:25:14 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:18:06 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,32 +78,24 @@ void	ft_init_mutex(t_data *data)
 
 void	ft_init_threads(t_data *data)
 {
-	int			i;
 	pthread_t	monitor;
 
-	i = -1;
-	if (data->philos == 1)
-	{
-		ft_check_one(data);
-		return ;
-	}	
 	data->thread = malloc(sizeof(pthread_t) * data->philos);
 	if (!data->thread)
 		return ;
-	else
+	if (pthread_create(&monitor, NULL, (void *)&ft_monitoring, \
+		(void *)data) != 0)
+		return (ft_werror("Error monitor create\n", 2));
+	if (data->philos == 1)
 	{
-		if (pthread_create(&monitor, NULL, (void *)&ft_monitoring, \
-			(void *)data) != 0)
-			return (ft_werror("Error monitor create\n", 2));
-		while (++i < data->philos)
-		{
-			if (pthread_create(&data->thread[i], NULL, (void *)&ft_routine, \
-				&data->philo[i]) != 0)
-				return (ft_werror("Error: pthread_create\n", 2));
-		}
+		ft_check_one(data);
+	}	
+	else
+	{	
+		ft_run_threads(data);
 		ft_join(data);
-		pthread_join(monitor, NULL);
 	}
+	pthread_join(monitor, NULL);
 }
 
 void	ft_check_one(t_data *data)
@@ -112,5 +104,4 @@ void	ft_check_one(t_data *data)
 		&data->philo[0]) != 0)
 		return (ft_werror("Error: pthread create one philo\n", 2));
 	ft_join(data);
-	//ft_end(data);
 }

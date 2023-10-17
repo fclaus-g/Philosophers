@@ -6,7 +6,7 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 12:48:03 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/17 11:18:06 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:03:21 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ft_init_threads(t_data *data)
 		ft_join(data);
 	}
 	pthread_join(monitor, NULL);
+	ft_end(data);
 }
 
 void	ft_check_one(t_data *data)

@@ -6,17 +6,16 @@
 /*   By: fclaus-g <fclaus-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 15:46:32 by usuario42         #+#    #+#             */
-/*   Updated: 2023/10/17 11:19:10 by fclaus-g         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:04:38 by fclaus-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-/*static void	ft_leaks(void)
+static void	ft_leaks(void)
 {
 	system("leaks -q philo");
-	atexit(ft_leaks);
-}*/
+}
 
 int	main(int ac, char **av)
 {
@@ -35,5 +34,6 @@ int	main(int ac, char **av)
 	ft_init_philos(&data);
 	ft_init_mutex(&data);
 	ft_init_threads(&data);
+	//atexit(ft_leaks);
 	return (0);
 }

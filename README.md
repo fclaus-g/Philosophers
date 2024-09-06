@@ -54,12 +54,6 @@ The problem is defined as follows:
 
    This command simulates 5 philosophers, where each philosopher has 800 milliseconds to eat, 200 milliseconds to sleep, and the program ensures that each philosopher eats at least 7 times.
 
-## Project Files
-
-- **philo.c**: Contains the main program logic and initialization.
-- **philo_utils.c**: Utility functions for handling synchronization and philosopher actions.
-- **philo.h**: Header file with function prototypes and necessary includes.
-- **Makefile**: Automates the compilation process.
 
 ## Example
 
